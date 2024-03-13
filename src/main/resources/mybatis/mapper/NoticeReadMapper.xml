@@ -7,7 +7,7 @@
     <select id="findAll" resultType="com.example.performancecache.dto.Notice">
         SELECT *
         FROM notice
-        limit 5000;
+                 limit 5000;
     </select>
 
 </mapper>
