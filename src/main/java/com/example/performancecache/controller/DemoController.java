@@ -23,3 +23,4 @@ public class DemoController {
         return new ResponseEntity<>(notices, HttpStatus.OK);
     }
 }
+
