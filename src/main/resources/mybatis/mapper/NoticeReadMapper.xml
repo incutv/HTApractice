@@ -13,7 +13,7 @@
     <select id="bestViews" resultType="com.example.performancecache.dto.Notice">
         select *
         from notice
-        where views > 0
+        where views
         order by views desc
         limit 10;
     </select>
