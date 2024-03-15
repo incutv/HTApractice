@@ -22,4 +22,11 @@ public class DemoController {
         List<Notice> notices = noticeService.getAllNotices();
         return new ResponseEntity<>(notices, HttpStatus.OK);
     }
+
+    @GetMapping("/best")
+    public ResponseEntity<Object> bestViews() {
+        List<Notice> notices = noticeService.getBestViews();
+
+        return new ResponseEntity<>(notices, HttpStatus.OK);
+    }
 }

@@ -10,4 +10,13 @@
         limit 5000;
     </select>
 
+    <select id="bestViews" resultType="com.example.performancecache.dto.Notice">
+        select *
+        from notice
+        where views
+        order by views desc
+        limit 10;
+    </select>
+
+
 </mapper>
