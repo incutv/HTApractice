@@ -17,9 +17,19 @@ public class DemoController {
         this.noticeService=noticeService;
     }
 
-    @GetMapping("")
+
+    @GetMapping("/bestViews")
+    public ResponseEntity<Object> bestView() {
+        List<Notice> bestView = noticeService.getTop10();
+        return new ResponseEntity<>(bestView, HttpStatus.OK);
+    }
+
+    /*
+    @GetMapping("/all")
     public ResponseEntity<Object> findAll() {
         List<Notice> notices = noticeService.getAllNotices();
         return new ResponseEntity<>(notices, HttpStatus.OK);
     }
+    */
+
 }
