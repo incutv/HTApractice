@@ -23,9 +23,9 @@ public class DemoController {
         return new ResponseEntity<>(notices, HttpStatus.OK);
     }
 
-    @GetMapping("test")
-    public ResponseEntity<Object> test() {
-        List<Notice> notices = noticeService.getAllNotices();
+    @GetMapping("/hot")
+    public ResponseEntity<Object> findHotNotices() {
+        List<Notice> notices = noticeService.getNoticesByViews();
         return new ResponseEntity<>(notices, HttpStatus.OK);
     }
 }
