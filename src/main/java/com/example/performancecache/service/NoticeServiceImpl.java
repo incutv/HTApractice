@@ -27,7 +27,7 @@ public class NoticeServiceImpl implements NoticeService{
 
     @Override
     public List<Notice> getBestViewedNotices() {
-        return null;
+        return noticeReadMapper.findBestViewedNotices();
     }
 
 }
