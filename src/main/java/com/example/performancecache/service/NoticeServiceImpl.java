@@ -5,18 +5,16 @@ import com.example.performancecache.mapper.NoticeReadMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
 import java.util.List;
 
 
 @Slf4j
 @Service
-public class NoticeServiceImpl implements NoticeService{
+public class NoticeServiceImpl implements NoticeService {
 
     private NoticeReadMapper noticeReadMapper;
 
-    public NoticeServiceImpl(NoticeReadMapper noticeReadMapper){
+    public NoticeServiceImpl(NoticeReadMapper noticeReadMapper) {
         this.noticeReadMapper = noticeReadMapper;
     }
 
@@ -25,4 +23,13 @@ public class NoticeServiceImpl implements NoticeService{
         return noticeReadMapper.findAll();
     }
 
+    @Override
+    public List<Notice> getTop10Views() {
+        return noticeReadMapper.findTop10Views();
+    }
+
+
 }
+
+
+
