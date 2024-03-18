@@ -25,7 +25,7 @@
             memoryStoreEvictionPolicy="LRU"/>
 
     <cache
-            name="NoticeReadMapper.top10Views"
+            name="top10Views"
             maxElementsInMemory="10000"
             maxElementsOnDisk="0"
             eternal="false"
