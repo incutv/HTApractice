@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface NoticeService {
     List<Notice> getAllNotices();
-
+    List<Notice> getBestViewedNotices();
 }
