@@ -7,7 +7,14 @@
     <select id="findAll" resultType="com.example.performancecache.dto.Notice">
         SELECT *
         FROM notice
-        limit 5000;
+        limit 5000
+    </select>
+
+    <select id="findHotNotices" resultType="com.example.performancecache.dto.Notice">
+        SELECT *
+        FROM notice
+        ORDER BY views DESC
+        limit 10
     </select>
 
 </mapper>
