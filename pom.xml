@@ -31,6 +31,8 @@
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
+
+
         <!-- cache -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -40,6 +42,9 @@
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache</artifactId>
         </dependency>
+
+
+
 
         <!-- mybatis sql pretty -->
         <dependency>
