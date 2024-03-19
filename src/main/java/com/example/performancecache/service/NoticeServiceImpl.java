@@ -11,13 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 
 
 @Slf4j
 @Service
-@Log4j2
 public class NoticeServiceImpl implements NoticeService{
 
     private NoticeReadMapper noticeReadMapper;
@@ -36,7 +37,10 @@ public class NoticeServiceImpl implements NoticeService{
     @Cacheable(value = "bestViewsCache")
     public List<Notice> getBestViews() {
 
-        return noticeReadMapper.bestViews();
+        List<Notice> notices = noticeReadMapper.bestViews();
+
+        Collections.sort(notices);
+        return notices;
 
     }
 }
