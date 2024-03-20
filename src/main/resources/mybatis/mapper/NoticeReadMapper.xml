@@ -5,15 +5,14 @@
 <mapper namespace="com.example.performancecache.mapper.NoticeReadMapper">
 
     <select id="findAll" resultType="com.example.performancecache.dto.Notice">
-        SELECT *
+        SELECT id, views, createDate
         FROM notice
         limit 5000;
     </select>
 
     <select id="bestViews" resultType="com.example.performancecache.dto.Notice">
-        select *
+        select id, views, createDate
         from notice
-        where views
         order by views desc
         limit 10;
     </select>

@@ -79,6 +79,12 @@
             <artifactId>ehcache</artifactId>
         </dependency>
 
+        <!-- 스프링부트 메일모듈 의존성 추가-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
 
     </dependencies>
 

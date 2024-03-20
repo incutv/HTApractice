@@ -24,7 +24,8 @@ public class DemoController {
     }
 
     @GetMapping("/best")
-    public ResponseEntity<Object> bestViews() {
+    public ResponseEntity<Object> bestViews(){
+
         List<Notice> notices = noticeService.getBestViews();
 
         return new ResponseEntity<>(notices, HttpStatus.OK);
