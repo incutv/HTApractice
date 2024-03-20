@@ -24,13 +24,13 @@ public class EmailController {
 
     @GetMapping("/send")
     public String sendEmail() {
-
-        String to = "01066230616a@gmail.com";
+        String from = "noreply@aaa.com";
+        String to = "rbska1234@naver.com";
         String subject = "Best Top 10 Views";
         List<Notice> notices = service.getBestViews();
 
 
-        emailService.sendEmail(to, subject, notices);
+        emailService.sendEmail(from, to, subject, notices);
 
         return "email";
     }

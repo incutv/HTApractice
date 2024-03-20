@@ -21,15 +21,15 @@ public class EmailService {
         this.javaMailSender = javaMailSender;}
 
     @Scheduled(cron = "0 0 18 * * *")
-    public void sendEmail(String to, String subject, List<Notice> notices) {
+    public void sendEmail(String from, String to, String subject, List<Notice> notices) {
 
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
 
         try {
-            helper.setFrom(new InternetAddress("noreply@aaa.com"));
-            helper.setTo("01066230616a@gmail.com");
+            helper.setFrom(new InternetAddress(from));
+            helper.setTo("rbska1234@naver.com");
             helper.setSubject("bestTop10Views");
 
             StringBuilder textBuilder = new StringBuilder();
