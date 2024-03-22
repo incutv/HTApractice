@@ -18,5 +18,12 @@
     </select>
 
 
+    <select id="compareBestView" resultType="com.example.performancecache.dto.Notice">
+        select id , title , content , who ,  views , createDate ,updateDate
+        from notice
+        order by views desc
+        limit 10;
+    </select>
+
 
 </mapper>
