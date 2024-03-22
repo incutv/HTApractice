@@ -10,6 +10,4 @@ import java.util.List;
 @Mapper
 public interface NoticeReadMapper {
     public List<Notice> findAll();
-    public List<Notice> bestView();
-    public List<Notice> compareBestView();
 }
