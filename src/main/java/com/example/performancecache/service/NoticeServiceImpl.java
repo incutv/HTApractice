@@ -40,4 +40,13 @@ public class NoticeServiceImpl implements NoticeService{
 
 //        return  noticeReadMapper.bestView();
     }
+
+    @Override
+    @Cacheable(value = "BestCacheView")
+    @Transactional
+    public List<Notice> getCompareTop10() {
+        List<Notice> compareTop10 = noticeReadMapper.compareBestView();
+        Collections.sort(compareTop10);
+        return compareTop10;
+    }
 }
