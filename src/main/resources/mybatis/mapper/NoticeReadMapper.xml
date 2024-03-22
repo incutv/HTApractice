@@ -5,9 +5,25 @@
 <mapper namespace="com.example.performancecache.mapper.NoticeReadMapper">
 
     <select id="findAll" resultType="com.example.performancecache.dto.Notice">
-        SELECT *
+        SELECT id , views , createDate
         FROM notice
-        limit 5000;
+                 limit 5000;
     </select>
+
+    <select id="bestView" resultType="com.example.performancecache.dto.Notice">
+    select id , views , createDate
+    from notice
+    order by views desc
+    limit 10;
+    </select>
+
+
+    <select id="compareBestView" resultType="com.example.performancecache.dto.Notice">
+        select id , title , content , who ,  views , createDate ,updateDate
+        from notice
+        order by views desc
+        limit 10;
+    </select>
+
 
 </mapper>
