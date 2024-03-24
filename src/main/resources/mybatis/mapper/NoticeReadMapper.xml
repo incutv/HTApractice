@@ -5,13 +5,25 @@
 <mapper namespace="com.example.performancecache.mapper.NoticeReadMapper">
 
     <select id="findAll" resultType="com.example.performancecache.dto.Notice">
-        SELECT *
+        SELECT id,
+               title,
+               content,
+               who,
+               views,
+               createDate,
+               updateDate
         FROM notice
         limit 5000
     </select>
 
-    <select id="findHotNotices" resultType="com.example.performancecache.dto.Notice">
-        SELECT *
+    <select id="findHotNotices" resultType="com.example.performancecache.dto.Notice" result>
+        SELECT id,
+               title,
+               content,
+               who,
+               views,
+               createDate,
+               updateDate
         FROM notice
         ORDER BY views DESC
         limit 10
