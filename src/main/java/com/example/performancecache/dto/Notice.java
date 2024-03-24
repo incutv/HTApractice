@@ -5,7 +5,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class Notice {
+public class Notice implements Comparable<Notice> {
     private long id;
     private String title;
     private String content;
@@ -14,4 +14,11 @@ public class Notice {
     private int views;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
+    public int compareTo(Notice o){
+        if(this.views != o.views)
+            return o.views - this.views;
+        else
+            return o.createDate.compareTo(this.createDate);
+    }
 }
