@@ -2,22 +2,18 @@ package com.example.performancecache.service;
 
 import com.example.performancecache.dto.Notice;
 import com.example.performancecache.mapper.NoticeReadMapper;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
-import java.util.List;
-import org.springframework.transaction.annotation.Transactional;
-
 @Slf4j
 @Service
-public class NoticeServiceImpl implements NoticeService{
+public class NoticeServiceImpl implements NoticeService {
 
     private NoticeReadMapper noticeReadMapper;
 
-    public NoticeServiceImpl(NoticeReadMapper noticeReadMapper){
+    public NoticeServiceImpl(NoticeReadMapper noticeReadMapper) {
         this.noticeReadMapper = noticeReadMapper;
     }
 
@@ -28,7 +24,6 @@ public class NoticeServiceImpl implements NoticeService{
 
     @Override
     @Cacheable(value = "notices")
-    @Transactional
     public List<Notice> getNoticesByViews() {
         return noticeReadMapper.findHotNotices();
     }
