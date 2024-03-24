@@ -3,8 +3,10 @@ package com.example.performancecache.dto;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import lombok.Getter;
 
 @Data
+@Getter
 public class Notice {
     private long id;
     private String title;

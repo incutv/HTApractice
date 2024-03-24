@@ -12,11 +12,10 @@
                views,
                createDate,
                updateDate
-        FROM notice
-        limit 5000
+        FROM notice limit 5000
     </select>
 
-    <select id="findHotNotices" resultType="com.example.performancecache.dto.Notice" result>
+    <select id="findHotNotices" resultType="com.example.performancecache.dto.Notice">
         SELECT id,
                title,
                content,
@@ -24,9 +23,7 @@
                views,
                createDate,
                updateDate
-        FROM notice
-        ORDER BY views DESC
-        limit 10
+        FROM notice limit 10
     </select>
 
 </mapper>

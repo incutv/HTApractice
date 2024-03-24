@@ -2,6 +2,8 @@ package com.example.performancecache.service;
 
 import com.example.performancecache.dto.Notice;
 import com.example.performancecache.mapper.NoticeReadMapper;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
@@ -25,7 +27,12 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     @Cacheable(value = "notices")
     public List<Notice> getNoticesByViews() {
-        return noticeReadMapper.findHotNotices();
+        List<Notice> notices = noticeReadMapper.findHotNotices();
+        Collections.sort(notices, Comparator.comparing(Notice::getViews)
+                                            .thenComparing(Notice::getCreateDate)
+                                            .reversed());
+
+        return notices;
     }
 
 }
