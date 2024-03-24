@@ -1,8 +1,10 @@
 package com.example.performancecache.controller;
 
 import com.example.performancecache.dto.Notice;
+import com.example.performancecache.service.EmailService;
 import com.example.performancecache.service.NoticeService;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/demo")
 public class DemoController {
+
+    @Autowired
+    private EmailService emailService;
     private NoticeService noticeService;
 
     public DemoController(NoticeService noticeService) {
@@ -29,4 +34,12 @@ public class DemoController {
         List<Notice> notices = noticeService.getNoticesByViews();
         return new ResponseEntity<>(notices, HttpStatus.OK);
     }
+
+    @GetMapping("/email")
+    public String triggerEmail() {
+        List<Notice> notices = noticeService.getNoticesByViews();
+        emailService.sendEmail(notices);
+        return "Success!";
+    }
+
 }
