@@ -1,8 +1,7 @@
 package com.example.performancecache.dto;
 
-import lombok.Data;
-
 import java.time.LocalDateTime;
+import lombok.Data;
 import lombok.Getter;
 
 @Data
