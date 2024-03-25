@@ -6,6 +6,7 @@ import java.util.List;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -18,6 +19,8 @@ public class EmailService {
     private JavaMailSender javaMailSender;
     @Autowired
     private NoticeService noticeService;
+    @Value("${username}")
+    private String recipientEmail;
 
     @Scheduled(cron = "0 0 18 * * *")
     public void sendEmailAutomatically() {
@@ -38,7 +41,7 @@ public class EmailService {
 
         try {
             helper.setFrom("noreply@gmail.com", "noreply");
-            helper.setTo("hinote444@gmail.com");
+            helper.setTo(recipientEmail);
             helper.setSubject("Hot Notices!");
             helper.setText(content.toString());
             javaMailSender.send(mimeMessage);
