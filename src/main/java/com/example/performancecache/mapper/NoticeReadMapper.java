@@ -11,4 +11,5 @@ import java.util.List;
 public interface NoticeReadMapper {
     public List<Notice> findAll();
     public List<Notice> bestView();
+    public List<Notice> compareBestView();
 }

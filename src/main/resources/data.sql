@@ -1,6 +1,6 @@
 
 INSERT INTO notice (title, content, who,views, createDate, updateDate)
-VALUES ('USA','content','incu',100,now(),now());
+dVALUES ('USA','content','incu',100,'2024-02-11 12:15:00','2024-02-11 12:15:00');
 INSERT INTO notice (title, content, who,views, createDate, updateDate)
 VALUES (1,'content','incu',11,now(),now());
 INSERT INTO notice (title, content, who,views, createDate, updateDate)
@@ -10,7 +10,7 @@ VALUES (1,'content','incu',1002,now(),now());
 INSERT INTO notice (title, content, who,views, createDate, updateDate)
 VALUES ('USA','content','incu',10000,now(),now());
 INSERT INTO notice (title, content, who,views, createDate, updateDate)
-VALUES (1,'content','incu',100,now(),now());
+VALUES (1,'content','incu',100,'2024-02-01 12:15:00','2024-02-11 12:15:00');
 INSERT INTO notice (title, content, who,views, createDate, updateDate)
 VALUES ('USA','content','incu',109,now(),now());
 INSERT INTO notice (title, content, who,views, createDate, updateDate)
@@ -27,10 +27,10 @@ INSERT INTO notice (title, content, who, createDate, updateDate)
 VALUES ('USA','content','incu',now(),now());
 INSERT INTO notice (title, content, who, createDate, updateDate)
 VALUES (1,'content','incu',now(),now());
-INSERT INTO notice (title, content, who, createDate, updateDate)
-VALUES ('USA','content','incu',now(),now());
-INSERT INTO notice (title, content, who, createDate, updateDate)
-VALUES (1,'content','incu',now(),now());
+INSERT INTO notice (title, content, who, views,createDate, updateDate)
+VALUES ('USA','content','incu',50 ,now(),now());
+INSERT INTO notice (title, content, who, views ,createDate, updateDate)
+VALUES (1,'content','incu',50,now(),now());
 INSERT INTO notice (title, content, who, createDate, updateDate)
 VALUES ('USA','content','incu',now(),now());
 INSERT INTO notice (title, content, who, createDate, updateDate)
@@ -40806,3 +40806,12 @@ INSERT INTO notice (title, content, who, createDate, updateDate)
 VALUES (1,'content','incu',now(),now());
 INSERT INTO notice (title, content, who, createDate, updateDate)
 VALUES ('USA','content','incu',now(),now());
+
+UPDATE notice
+SET createDate = '2024-01-20 12:00:00'
+WHERE id = 6;
+
+
+UPDATE notice
+SET createDate = '2024-03-20 12:00:00'
+WHERE id = 1;
