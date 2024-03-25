@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/demo")
 public class DemoController {
 
-    @Autowired
     private EmailService emailService;
     private NoticeService noticeService;
 
-    public DemoController(NoticeService noticeService) {
+    public DemoController(NoticeService noticeService, EmailService emailService) {
         this.noticeService = noticeService;
+        this.emailService = emailService;
     }
 
     @GetMapping("")
