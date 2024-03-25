@@ -6,8 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -30,7 +29,9 @@ public class NoticeServiceImpl implements NoticeService{
     @Override
     @Cacheable(value = "NoticeReadMapper.findBestViewedNotices")
     public List<Notice> getBestViewedNotices() {
-        return noticeReadMapper.findBestViewedNotices();
+        List<Notice> bestViewedNotices = noticeReadMapper.findBestViewedNotices();
+        Collections.sort(bestViewedNotices);
+        return bestViewedNotices;
     }
 
 }
