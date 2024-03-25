@@ -23,9 +23,9 @@ public class EmailService {
     public void simpleSendMail() {
 
         SimpleMailMessage smm = new SimpleMailMessage();
-        smm.setSubject("네이버에서 구글로");
+        smm.setSubject("구글에서 네이버로");
         smm.setTo("rltjs3563@naver.com");
-        smm.setFrom("rltjs3563@naver.com");
+        smm.setFrom("noreply@gmail.com");
         smm.setText("Test 메일내용 입니당");
 
         javaMailSender.send(smm);
@@ -40,13 +40,14 @@ public class EmailService {
 
         SimpleMailMessage topMessage = new SimpleMailMessage();
         topMessage.setTo("rltjs9694@gmail.com");
+        topMessage.setFrom("noreply@gmail.com");
         topMessage.setSubject("상위 조회수 10개 목록");
         topMessage.setText(emailContent.toString());
 
         javaMailSender.send(topMessage);
     }
 
-    @Scheduled(cron = "0 48 18 * * *")
+    @Scheduled(cron = "0 15 17 * * *")
     public void sendMailAtScheduleTime() {
 
         List<Notice> noticeList = noticeService.getCompareTop10();
@@ -55,12 +56,16 @@ public class EmailService {
         for (Notice notice : noticeList) {
             emailContent.append(notice != null ? notice.toString() : "").append("\n");
         }
+        System.out.println("#######   이메일 보내기 작동하는지 확인 ##########");
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo("rltjs9694@gmail.com");
         message.setSubject("일정시간에 메일 보내기");
         message.setText(emailContent.toString());
 
+        System.out.println("######### 이메일 보내기 작동하는지 확인 2 ##########");
         javaMailSender.send(message);
+
+        System.out.println("#### 이메일 보내기 작동하는지 확인 3  #######");
     }
 }
