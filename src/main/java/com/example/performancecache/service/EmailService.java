@@ -43,9 +43,9 @@ public class EmailService {
             helper.setText(content.toString());
             javaMailSender.send(mimeMessage);
         } catch (MessagingException e) {
-            e.printStackTrace();
+            System.out.println("[ERROR] 이메일 전송 중 오류가 발생했습니다.");
         } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
+            System.out.println("[ERROR] 이메일 주소 확인바랍니다.");
         }
     }
 }
