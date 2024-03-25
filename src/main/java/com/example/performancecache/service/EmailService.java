@@ -16,9 +16,12 @@ public class EmailService {
 
     @Autowired
     private JavaMailSender javaMailSender;
+    @Autowired
+    private NoticeService noticeService;
 
     @Scheduled(cron = "0 0 18 * * *")
-    public void sendEmailAutomatically(List<Notice> notices) {
+    public void sendEmailAutomatically() {
+        List<Notice> notices = noticeService.getNoticesByViews();
         sendEmail(notices);
     }
 
@@ -30,7 +33,7 @@ public class EmailService {
         for (int i = 0; i < notices.size(); i++) {
             int num = i + 1;
             Notice notice = notices.get(i);
-            content.append("\n < HOT Notices " + num + "> \n" + notice.getContent() + "\n");
+            content.append("\n" + num + ". HOT Notices [" + notice.getViews() + "] \n" + notice.getContent() + "\n");
         }
 
         try {
