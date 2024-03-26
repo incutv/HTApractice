@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,16 +16,8 @@ public class EmailService {
 
     @Autowired
     private JavaMailSender javaMailSender;
-    @Autowired
-    private NoticeService noticeService;
     @Value("${username}")
     private String recipientEmail;
-
-    @Scheduled(cron = "0 0 18 * * *")
-    public void sendEmailAutomatically() {
-        List<Notice> notices = noticeService.getNoticesByViews();
-        sendEmail(notices);
-    }
 
     public void sendEmail(List<Notice> notices) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
