@@ -14,7 +14,7 @@ public class ScheduleService {
     @Autowired
     private NoticeService noticeService;
 
-    @Scheduled(cron = "0/5 * * * * *")
+    @Scheduled(cron = "0 0 18 * * *")
     public void sendEmailAutomatically() {
         List<Notice> notices = noticeService.getNoticesByViews();
         emailService.sendEmail(notices);
