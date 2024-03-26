@@ -25,7 +25,7 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     @Cacheable(value = "notices")
-    public List<Notice> getNoticesByViews() {
+    public List<Notice> sortNoticesByViewsAndCreateDate() {
         List<Notice> notices = noticeReadMapper.findHotNotices();
         Collections.sort(notices);
 

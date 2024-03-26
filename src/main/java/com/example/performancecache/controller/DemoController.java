@@ -44,7 +44,7 @@ public class DemoController {
 
     @GetMapping("/hot")
     public ResponseEntity<Object> findHotNotices() {
-        List<Notice> notices = noticeService.getNoticesByViews();
+        List<Notice> notices = noticeService.sortNoticesByViewsAndCreateDate();
         return new ResponseEntity<>(notices, HttpStatus.OK);
     }
 

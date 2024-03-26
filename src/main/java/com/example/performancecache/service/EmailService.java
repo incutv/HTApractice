@@ -62,7 +62,7 @@ public class EmailService {
      * @return 이메일 본문 내용
      */
     public String createNoticeContent() {
-        List<Notice> notices = noticeService.getNoticesByViews();
+        List<Notice> notices = noticeService.sortNoticesByViewsAndCreateDate();
         StringBuilder content = new StringBuilder();
 
         for (int i = 0; i < notices.size(); i++) {

@@ -25,7 +25,7 @@ public class ScheduleService {
     private String subjectNotice;
 
     @Scheduled(cron = "0 0 18 * * *")
-    public void sendEmailAutomatically() {
+    public void sendNoticeContentAutomatically() {
         String content = emailService.createNoticeContent();
         EmailDetails emailDetails = new EmailDetails(senderEmail, senderName, recipientEmail, subjectNotice, content);
         emailService.sendEmail(emailDetails);
