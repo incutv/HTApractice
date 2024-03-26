@@ -18,6 +18,10 @@ public class EmailService {
     private JavaMailSender javaMailSender;
     @Value("${username}")
     private String recipientEmail;
+    @Value("${email.sender.address}")
+    private String senderAddress;
+    @Value("${email.sender.name}")
+    private String senderName;
 
     public void sendEmail(List<Notice> notices) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -31,7 +35,7 @@ public class EmailService {
         }
 
         try {
-            helper.setFrom("noreply@gmail.com", "noreply");
+            helper.setFrom(senderAddress, senderName);
             helper.setTo(recipientEmail);
             helper.setSubject("Hot Notices!");
             helper.setText(content.toString());
