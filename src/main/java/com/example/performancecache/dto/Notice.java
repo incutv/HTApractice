@@ -2,11 +2,9 @@ package com.example.performancecache.dto;
 
 import java.time.LocalDateTime;
 import lombok.Data;
-import lombok.Getter;
 
 @Data
-@Getter
-public class Notice {
+public class Notice implements Comparable<Notice> {
     private long id;
     private String title;
     private String content;
@@ -15,4 +13,13 @@ public class Notice {
     private int views;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
+    @Override
+    public int compareTo(Notice otherNotice) {
+        if (this.views != otherNotice.views) {
+            return otherNotice.views - this.views;
+        }
+
+        return otherNotice.createDate.compareTo(this.createDate);
+    }
 }
