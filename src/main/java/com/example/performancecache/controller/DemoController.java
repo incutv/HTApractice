@@ -34,12 +34,12 @@ public class DemoController {
         return new ResponseEntity<>(bestView, HttpStatus.OK);
     }
 
-    /*
+
     @GetMapping("/all")
     public ResponseEntity<Object> findAll() {
         List<Notice> notices = noticeService.getAllNotices();
         return new ResponseEntity<>(notices, HttpStatus.OK);
     }
-    */
+
 
 }
