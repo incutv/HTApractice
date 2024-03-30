@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/demo")
 public class DemoController {
-    private NoticeService noticeService;
+    private final NoticeService noticeService;
 
     public DemoController(NoticeService noticeService){
         this.noticeService=noticeService;
@@ -22,4 +22,12 @@ public class DemoController {
         List<Notice> notices = noticeService.getAllNotices();
         return new ResponseEntity<>(notices, HttpStatus.OK);
     }
+
+    @GetMapping("/top10Views")
+    public ResponseEntity<Object> findTop10Views() {
+        List<Notice> notices = noticeService.getTop10Views();
+        return new ResponseEntity<>(notices, HttpStatus.OK);
+    }
 }
+
+
