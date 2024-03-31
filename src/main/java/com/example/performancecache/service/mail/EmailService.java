@@ -5,6 +5,7 @@ import com.example.performancecache.service.NoticeService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -43,8 +44,11 @@ public class EmailService {
         topMessage.setFrom("noreply@gmail.com");
         topMessage.setSubject("상위 조회수 10개 목록");
         topMessage.setText(emailContent.toString());
-
-        javaMailSender.send(topMessage);
+        try{
+            javaMailSender.send(topMessage);
+        } catch (MailException ex) {
+            log.error("어..음..이메일 실패했습니다",ex);
+        }
     }
 
     @Scheduled(cron = "0 15 17 * * *")
