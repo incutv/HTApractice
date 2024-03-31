@@ -1,6 +1,7 @@
 package com.example.performancecache.service;
 
 import com.example.performancecache.dto.EmailDetails;
+import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -25,6 +26,7 @@ public class ScheduleService {
     private String subjectNotice;
 
     @Scheduled(cron = "0 0 18 * * *")
+    @SchedulerLock(name = "sendNoticeContentAutomatically", lockAtLeastFor = "20s", lockAtMostFor = "50s")
     public void sendNoticeContentAutomatically() {
         String content = emailService.createNoticeContent();
         EmailDetails emailDetails = new EmailDetails(senderEmail, senderName, recipientEmail, subjectNotice, content);
