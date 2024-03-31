@@ -4,6 +4,7 @@ import com.example.performancecache.dto.EmailDetails;
 import com.example.performancecache.dto.Notice;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +22,19 @@ public class EmailService {
     private NoticeService noticeService;
 
     /**
-     * 이메일 전송 메소드
+     * 이메일 전송 메소드(비동기 방식)
      *
      * @param emailDetails 발신자, 수신자, 제목 등이 저장되어 있는 클래스
      */
     public void sendEmail(EmailDetails emailDetails) {
-        MimeMessage mimeMessage = createEmailInfo(emailDetails);
-        javaMailSender.send(mimeMessage);
+        CompletableFuture.runAsync(() -> {
+                             MimeMessage mimeMessage = createEmailInfo(emailDetails);
+                             javaMailSender.send(mimeMessage);
+                         })
+                         .exceptionally(e -> {
+                             System.out.println("이메일 발송 중 다음과 같은 오류가 발생했습니다 : " + e.getMessage());
+                             return null;
+                         });
     }
 
     /**
@@ -46,7 +53,7 @@ public class EmailService {
             helper.setSubject(emailDetails.getTitle());
             helper.setText(emailDetails.getContent());
         } catch (MessagingException e) {
-            System.out.println("[ERROR] 이메일 전송 중 오류가 발생했습니다.");
+            System.out.println("[ERROR] 이메일 발송 중 오류가 발생했습니다.");
         } catch (UnsupportedEncodingException e) {
             System.out.println("[ERROR] 이메일 주소 확인바랍니다.");
         }
