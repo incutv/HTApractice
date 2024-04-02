@@ -14,7 +14,7 @@ import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 
 @Configuration
 @EnableScheduling
-@EnableSchedulerLock(defaultLockAtMostFor = "PT30S")
+@EnableSchedulerLock(defaultLockAtMostFor = "30s")
 public class ScheduleConfig implements SchedulingConfigurer {
 
     @Override
