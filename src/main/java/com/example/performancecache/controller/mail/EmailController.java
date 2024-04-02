@@ -4,8 +4,9 @@ import com.example.performancecache.dto.Notice;
 import com.example.performancecache.service.NoticeService;
 import com.example.performancecache.service.mail.EmailService;
 import java.util.List;
+import javax.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,13 +21,22 @@ public class EmailController {
     private final EmailService emailService;
     private final NoticeService noticeService;
 
+    @Value("${spring.mail.username}")
+    private String to;
+
 
     @GetMapping("/simple")
     public String simpleSendMail() {
-        emailService.simpleSendMail();
-
+        try {
+            emailService.sendMail();
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
         return "email/simpleEmail";
     }
+
+
+
 
     @GetMapping("/top10")
     public String top10View(Model model) {

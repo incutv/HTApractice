@@ -3,11 +3,15 @@ package com.example.performancecache.service.mail;
 import com.example.performancecache.dto.Notice;
 import com.example.performancecache.service.NoticeService;
 import java.util.List;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -17,20 +21,32 @@ import org.springframework.stereotype.Service;
 public class EmailService {
 
     private final  JavaMailSender javaMailSender;
-
     private final NoticeService noticeService;
 
-    // 메일보내기
-    public void simpleSendMail() {
+    // application.properties 값을 직접 주입받기
+    @Value("${spring.mail.username}")
+    private String recipientEmail;  // 받는사람 이메일주소 to
 
-        SimpleMailMessage smm = new SimpleMailMessage();
-        smm.setSubject("구글에서 네이버로");
-        smm.setTo("rltjs3563@naver.com");
-        smm.setFrom("noreply@gmail.com");
-        smm.setText("Test 메일내용 입니당");
+    @Value("${email.sender.email}")
+    private String senderEmail; // 보내는사람 이메일 주소from
 
-        javaMailSender.send(smm);
+    /*
+       SimpleMessage - 간단한 텍스트
+       MimeMessage   - 텍스트 , 파일 이것저것
+    */
+
+    // 기본 메일 보내기
+    public void sendMail() throws MessagingException {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,true);
+        helper.setFrom(senderEmail);
+        helper.setTo(recipientEmail);
+        helper.setSubject("제목 부분");
+        helper.setText("내용 부분");
+
+        javaMailSender.send(mimeMessage);
     }
+
 
     public void top10SendMail(List<Notice> noticeList){
         StringBuilder emailContent = new StringBuilder();
@@ -51,7 +67,7 @@ public class EmailService {
         }
     }
 
-    @Scheduled(cron = "0 15 17 * * *")
+    @Scheduled(cron = "0 31 23 * * *")
     public void sendMailAtScheduleTime() {
 
         List<Notice> noticeList = noticeService.getCompareTop10();
@@ -60,16 +76,13 @@ public class EmailService {
         for (Notice notice : noticeList) {
             emailContent.append(notice != null ? notice.toString() : "").append("\n");
         }
-        System.out.println("#######   이메일 보내기 작동하는지 확인 ##########");
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo("rltjs9694@gmail.com");
         message.setSubject("일정시간에 메일 보내기");
         message.setText(emailContent.toString());
 
-        System.out.println("######### 이메일 보내기 작동하는지 확인 2 ##########");
         javaMailSender.send(message);
 
-        System.out.println("#### 이메일 보내기 작동하는지 확인 3  #######");
     }
 }
