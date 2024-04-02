@@ -49,7 +49,7 @@ public class DemoController {
     }
 
     @GetMapping("/email")
-    public String triggerEmail() {
+    public String sendNoticeContentManually() {
         String content = emailService.createNoticeContent();
         EmailDetails emailDetails = new EmailDetails(senderEmail, senderName, recipientEmail, subjectNotice, content);
         emailService.sendEmail(emailDetails);
