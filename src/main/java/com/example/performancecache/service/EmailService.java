@@ -7,11 +7,13 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class EmailService {
 
@@ -32,7 +34,7 @@ public class EmailService {
                              javaMailSender.send(mimeMessage);
                          })
                          .exceptionally(e -> {
-                             System.out.println("이메일 발송 중 다음과 같은 오류가 발생했습니다 : " + e.getMessage());
+                             log.error("이메일 발송 중 다음과 같은 오류가 발생했습니다. : " + e.getMessage());
                              return null;
                          });
     }
@@ -53,9 +55,9 @@ public class EmailService {
             helper.setSubject(emailDetails.getTitle());
             helper.setText(emailDetails.getContent());
         } catch (MessagingException e) {
-            System.out.println("[ERROR] 이메일 발송 중 오류가 발생했습니다.");
+            log.error("[ERROR] 이메일 발송 중 오류가 발생했습니다. " + e.getMessage());
         } catch (UnsupportedEncodingException e) {
-            System.out.println("[ERROR] 이메일 주소 확인바랍니다.");
+            log.error("[ERROR] 이메일 주소 확인바랍니다. " + e.getMessage());
         }
         return mimeMessage;
     }
